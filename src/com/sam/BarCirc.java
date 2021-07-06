@@ -2,7 +2,6 @@ package com.sam;
 
 public class BarCirc {
     public String material;
-    public int matType;
     public int diameter;
     public double length;
 

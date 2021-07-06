@@ -2,7 +2,6 @@ package com.sam;
 
 public class BarRec {
     public String material;
-    public int matType;
     public int sideA;
     public int sideB;
     public double length ;
