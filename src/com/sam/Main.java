@@ -1,32 +1,14 @@
 package com.sam;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.Scanner;
 
 public class Main {
 
-    private JButton button1;
-    private JPanel panelMain;
-
-    public Main() {
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Menu.addBarRec();
-            }
-        });
-    }
-
     public static void main(String[] args) {
-        JFrame mainFrame= new JFrame("StockTracker");
-        mainFrame.setContentPane(new Main().panelMain);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.pack();
-        mainFrame.setVisible(true);
-        /*
+        JFrame frame = new MenuGUI("Stock Tracker");
+        frame.setVisible(true);
+    }
+     /*
         Scanner sc = new Scanner(System.in);
 
         System.out.println("(1) Add new profile type");
@@ -53,8 +35,6 @@ public class Main {
             case 2 -> System.out.println("Feature to come");
             case 3 -> System.out.println("Feature yet to come");
         }*/
-
-    }
 
         /*
         BarRec x[]= new BarRec[2];
