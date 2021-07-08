@@ -3,9 +3,9 @@ package com.sam;
 public class BarCirc {
     public String material;
     public int diameter;
-    public double length;
+    public int length;
 
-    public BarCirc(int matType, int diameter, double length) {
+    public BarCirc(int matType, int diameter, int length) {
         this.setMaterial(matType);
         this.diameter = diameter;
         this.length = length;

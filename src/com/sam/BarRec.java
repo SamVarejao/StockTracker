@@ -4,9 +4,9 @@ public class BarRec {
     public String material;
     public int sideA;
     public int sideB;
-    public double length ;
+    public int length ;
 
-    public BarRec(int matType, int sideA, int sideB, double length) {
+    public BarRec(int matType, int sideA, int sideB, int length) {
         this.setMaterial(matType);
 
 //  Make sure sideA is the biggest side to maintain the model

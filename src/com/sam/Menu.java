@@ -34,7 +34,7 @@ public final class Menu {
         System.out.println("Introduce diameter(mm): ");
         int diameter = sc.nextInt();
         System.out.println("Introduce object length(mm): ");
-        double length = sc.nextDouble();
+        int length = sc.nextInt();
 
         //------------------------------------------------
         return new BarCirc(materialNum, diameter, length);
@@ -44,6 +44,7 @@ public final class Menu {
         Scanner sc = new Scanner(System.in);
 
         //Assign values ---------------------------------
+
         System.out.println("Introduce material type: ");
         System.out.println("(1) Iron");
         System.out.println("(2) Stainless steel");
@@ -69,7 +70,7 @@ public final class Menu {
         System.out.println("Introduce width(mm): ");
         int sideB = sc.nextInt();
         System.out.println("Introduce object length(mm): ");
-        double length = sc.nextDouble();
+        int length = sc.nextInt();
         //------------------------------------------------
 
         return new BarRec(materialNum, sideA, sideB, length);
@@ -104,7 +105,7 @@ public final class Menu {
         System.out.println("Introduce diameter(mm): ");
         int diameter = sc.nextInt();
         System.out.println("Introduce object length(mm): ");
-        double length = sc.nextDouble();
+        int length = sc.nextInt();
 
         //------------------------------------------------
         return new TubeCirc(materialNum, diameter, length, wallThic);
@@ -142,7 +143,7 @@ public final class Menu {
         System.out.println("Introduce width(mm): ");
         int sideB = sc.nextInt();
         System.out.println("Introduce object length(mm): ");
-        double length = sc.nextDouble();
+        int length = sc.nextInt();
         //------------------------------------------------
 
         return new TubeRec(materialNum, sideA, sideB, length, wallThic);
