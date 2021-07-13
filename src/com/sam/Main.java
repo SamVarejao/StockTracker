@@ -5,8 +5,11 @@ import javax.swing.*;
 public class Main {
 
     public static void main(String[] args) {
+
         JFrame frame = new MenuGUI("Stock Tracker");
         frame.setVisible(true);
+
+
     }
      /*
         Scanner sc = new Scanner(System.in);

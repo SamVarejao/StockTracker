@@ -125,8 +125,8 @@ public class MenuGUI extends JFrame {
                 matField = 4;
             }
 
-            BarRec newObj = new BarRec(matField, heightField, widthField, lengthField);
-            System.out.println(newObj);
+            BarRec newBarRec = new BarRec(matField, heightField, widthField, lengthField);
+            System.out.println(newBarRec);
 
         });
         //</editor-fold>
@@ -149,8 +149,8 @@ public class MenuGUI extends JFrame {
                 matField = 4;
             }
 
-            BarRec newObj = new TubeRec(matField, heightField, widthField, lengthField, wallThickField);
-            System.out.println(newObj);
+            BarRec newTubeRec = new TubeRec(matField, heightField, widthField, lengthField, wallThickField);
+            System.out.println(newTubeRec);
 
         });
         //</editor-fold>
@@ -171,8 +171,8 @@ public class MenuGUI extends JFrame {
                 matField = 4;
             }
 
-            BarCirc newObj = new BarCirc(matField, diamField, lengthField);
-            System.out.println(newObj);
+            BarCirc newBarCirc = new BarCirc(matField, diamField, lengthField);
+            System.out.println(newBarCirc);
 
         });
         //</editor-fold>
@@ -194,8 +194,9 @@ public class MenuGUI extends JFrame {
                 matField = 4;
             }
 
-            BarCirc newObj = new TubeCirc(matField, diamField, lengthField, wallThickField);
-            System.out.println(newObj);
+            BarCirc newTubeCirc = new TubeCirc(matField, diamField, lengthField, wallThickField);
+            System.out.println(newTubeCirc);
+           
         });
         //</editor-fold>
     }
