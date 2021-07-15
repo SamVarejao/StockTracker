@@ -1,6 +1,8 @@
 package com.sam;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MenuGUI extends JFrame {
     private JPanel panelMain; //main "canvas"
@@ -18,6 +20,7 @@ public class MenuGUI extends JFrame {
     private JButton circTube;
     private JButton recTube;
     private JButton recBar;
+    private JButton bckToMain1;
     //</editor-fold>
 
     //<editor-fold desc="-> Rectangular Bar components">
@@ -66,6 +69,10 @@ public class MenuGUI extends JFrame {
     private JTextField circTubeDiamTF;
     private JTextField circTubeLengthTF;
     private JButton circTubeBtn;
+    private JButton bckToType1;
+    private JButton bckToType2;
+    private JButton bckToType3;
+    private JButton bckToType4;
     //</editor-fold>
 
     public MenuGUI(String title) {
@@ -73,7 +80,7 @@ public class MenuGUI extends JFrame {
 
         this.setContentPane(mainMenuPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500, 300);
+        this.setSize(500, 500);
 
         //<editor-fold desc="-> Main menu">
         newBtn.addActionListener(e -> {
@@ -106,6 +113,11 @@ public class MenuGUI extends JFrame {
             revalidate();
 
         });
+        // Ye old return to previous menu button
+        bckToMain1.addActionListener(e -> {
+            setContentPane(mainMenuPanel);
+            revalidate();
+        });
         //</editor-fold>
 
         //<editor-fold desc="-> New Rectangular Bar">
@@ -128,6 +140,11 @@ public class MenuGUI extends JFrame {
             BarRec newBarRec = new BarRec(matField, heightField, widthField, lengthField);
             System.out.println(newBarRec);
 
+        });
+        // Ye old return to previous menu button
+        bckToType1.addActionListener(e -> {
+            setContentPane(typePanel);
+            revalidate();
         });
         //</editor-fold>
 
@@ -153,13 +170,18 @@ public class MenuGUI extends JFrame {
             System.out.println(newTubeRec);
 
         });
+        // Ye old return to previous menu button
+        bckToType2.addActionListener(e -> {
+            setContentPane(typePanel);
+            revalidate();
+        });
         //</editor-fold>
 
         //<editor-fold desc="-> New Circular Bar">
         circBarBtn.addActionListener(e -> {
             int diamField = (int) (Double.parseDouble(circBarDiamTF.getText()));
             int lengthField = (int) Double.parseDouble(circBarLengthTF.getText());
-            int matField = 0;
+            int matField = 0; //this will be converted into a string inside the BarCirc class
 
             if (circBarMatIron.isSelected()) {
                 matField = 1;
@@ -172,8 +194,23 @@ public class MenuGUI extends JFrame {
             }
 
             BarCirc newBarCirc = new BarCirc(matField, diamField, lengthField);
-            System.out.println(newBarCirc);
+            boolean saveStatus = SaveToDB.saveToDB_circBar(newBarCirc.material, newBarCirc.diameter, newBarCirc.length);
+            System.out.println(saveStatus);
 
+            if (!saveStatus) {
+                JOptionPane.showMessageDialog(this, "Profile already exists, you can access the quantity through the list");
+
+            } else {
+
+                JOptionPane.showMessageDialog(this, "New profile added");
+
+            }
+
+        });
+        // Ye old return to previous menu button
+        bckToType3.addActionListener(e -> {
+            setContentPane(typePanel);
+            revalidate();
         });
         //</editor-fold>
 
@@ -196,7 +233,12 @@ public class MenuGUI extends JFrame {
 
             BarCirc newTubeCirc = new TubeCirc(matField, diamField, lengthField, wallThickField);
             System.out.println(newTubeCirc);
-           
+
+        });
+        // Ye old return to previous menu button
+        bckToType4.addActionListener(e -> {
+            setContentPane(typePanel);
+            revalidate();
         });
         //</editor-fold>
     }
