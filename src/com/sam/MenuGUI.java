@@ -111,6 +111,8 @@ public class MenuGUI extends JFrame {
                 System.out.println("END RESULT: " + Arrays.deepToString(data));
 
                 list = new JTable(data, columnNames);
+                JScrollPane stockList = new JScrollPane(list);
+                list.setFillsViewportHeight(true);
 
                 setContentPane(stockList);
                 revalidate();
