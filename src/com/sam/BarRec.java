@@ -25,7 +25,6 @@ public class BarRec {
 //-----------------
         this.length = length;
 
-        saveToDB(sideA, sideB, length, this.material);
     }
 
     //Convert number(materialType) into material----------------------------------
@@ -44,27 +43,6 @@ public class BarRec {
         this.material = materialName;
     }
     //------------------------------------------------
-
-    public void saveToDB(int heightField, int widthField, int lengthField, String materialField) {
-        Connection con;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost/Stock";
-            String user = "stockmaster";
-            String password = "123";
-
-            con = DriverManager.getConnection(url, user, password);
-            Statement s = con.createStatement();
-
-            String query = String.format("INSERT INTO REC_BAR (height, width, length, material, quantity) VALUES (%s, %s, %s, '%s', 1 )", heightField, widthField, lengthField, materialField);
-
-            s.executeUpdate(query);
-
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public String toString() {
         return "material:" + material + ", sideA:" + sideA + ", sideB:" + sideB + ", length:" + length;

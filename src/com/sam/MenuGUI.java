@@ -1,8 +1,13 @@
 package com.sam;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class MenuGUI extends JFrame {
     private JPanel panelMain; //main "canvas"
@@ -10,7 +15,7 @@ public class MenuGUI extends JFrame {
     //<editor-fold desc="-> Main menu components">
     private JPanel mainMenuPanel;
     private JButton newBtn;
-    private JButton addBtn;
+    private JButton listBtn;
     private JButton removeBtn;
     //</editor-fold>
 
@@ -73,6 +78,13 @@ public class MenuGUI extends JFrame {
     private JButton bckToType2;
     private JButton bckToType3;
     private JButton bckToType4;
+
+    //</editor-fold>
+
+    //<editor-fold desc="Stock List">
+
+    private JPanel stockList;
+    private JTable list;
     //</editor-fold>
 
     public MenuGUI(String title) {
@@ -87,8 +99,24 @@ public class MenuGUI extends JFrame {
             setContentPane(typePanel);
             revalidate();
         });
-        addBtn.addActionListener(e -> {
+        listBtn.addActionListener(e -> {
+            try {
+                String[] columnNames = {"diameter",
+                        "length",
+                        "material",
+                        "quantity"
+                };
 
+                Object[][] data = GetListDB.as("circ_bar");
+                System.out.println("END RESULT: " + Arrays.deepToString(data));
+
+                list = new JTable(data, columnNames);
+
+                setContentPane(stockList);
+                revalidate();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         });
         removeBtn.addActionListener(e -> {
 
@@ -137,8 +165,18 @@ public class MenuGUI extends JFrame {
                 matField = 4;
             }
 
-            BarRec newBarRec = new BarRec(matField, heightField, widthField, lengthField);
-            System.out.println(newBarRec);
+            BarRec newBarRec = new BarRec(heightField, widthField, lengthField, matField);
+            boolean saveStatus = SaveToDB.recBar(newBarRec.sideA, newBarRec.sideB, newBarRec.length, newBarRec.material);
+            System.out.println(saveStatus);
+
+            if (!saveStatus) {
+                JOptionPane.showMessageDialog(this, "Profile already exists, you can access the quantity through the list");
+
+            } else {
+
+                JOptionPane.showMessageDialog(this, "New profile added");
+
+            }
 
         });
         // Ye old return to previous menu button
@@ -166,8 +204,20 @@ public class MenuGUI extends JFrame {
                 matField = 4;
             }
 
-            BarRec newTubeRec = new TubeRec(matField, heightField, widthField, lengthField, wallThickField);
-            System.out.println(newTubeRec);
+            TubeRec newTubeRec = new TubeRec(matField, heightField, widthField, lengthField, wallThickField);
+
+            boolean saveStatus = SaveToDB.recTube(newTubeRec.sideA, newTubeRec.sideB, newTubeRec.length, newTubeRec.wallThic, newTubeRec.material);
+            System.out.println(saveStatus);
+
+            if (!saveStatus) {
+                JOptionPane.showMessageDialog(this, "Profile already exists, you can access the quantity through the list");
+
+            } else {
+
+                JOptionPane.showMessageDialog(this, "New profile added");
+
+            }
+
 
         });
         // Ye old return to previous menu button
@@ -194,7 +244,7 @@ public class MenuGUI extends JFrame {
             }
 
             BarCirc newBarCirc = new BarCirc(matField, diamField, lengthField);
-            boolean saveStatus = SaveToDB.saveToDB_circBar(newBarCirc.material, newBarCirc.diameter, newBarCirc.length);
+            boolean saveStatus = SaveToDB.circBar(newBarCirc.diameter, newBarCirc.length, newBarCirc.material);
             System.out.println(saveStatus);
 
             if (!saveStatus) {
@@ -231,8 +281,17 @@ public class MenuGUI extends JFrame {
                 matField = 4;
             }
 
-            BarCirc newTubeCirc = new TubeCirc(matField, diamField, lengthField, wallThickField);
-            System.out.println(newTubeCirc);
+            TubeCirc newTubeCirc = new TubeCirc(matField, diamField, lengthField, wallThickField);
+            boolean saveStatus = SaveToDB.circTube(newTubeCirc.diameter, newTubeCirc.length, newTubeCirc.wallThic, newTubeCirc.material);
+            System.out.println(saveStatus);
+
+            if (!saveStatus) {
+                JOptionPane.showMessageDialog(this, "Profile already exists, you can access the quantity through the list");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "New profile added");
+
+            }
 
         });
         // Ye old return to previous menu button
@@ -241,5 +300,7 @@ public class MenuGUI extends JFrame {
             revalidate();
         });
         //</editor-fold>
+
+
     }
 }
