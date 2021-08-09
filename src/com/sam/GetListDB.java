@@ -6,8 +6,16 @@ import java.util.ArrayList;
 final class GetListDB {
     private GetListDB() {
     }
+    /*
+    * TODO: Make this function reusable. List will be called by 4 other methods.
+    *   These methods will pass the database table to be used and also the collumns name
+    *  for the GUI table
+    *
+    *
+    *
+    * */
 
-    public static Object[][] as(String collumn) throws SQLException {
+    public static Object[][] List(String dbTable) throws SQLException {
         Connection con = null;
         ResultSet rs = null;
         Statement stm = null;
@@ -25,7 +33,7 @@ final class GetListDB {
             String user = "stockmaster";
             String password = "123";
 
-            String query = String.format("SELECT * FROM %s ;", collumn);
+            String query = String.format("SELECT * FROM %s ;", dbTable);
 
             con = DriverManager.getConnection(url, user, password);
             stm = con.createStatement();

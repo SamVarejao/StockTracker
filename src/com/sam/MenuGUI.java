@@ -1,12 +1,8 @@
 package com.sam;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class MenuGUI extends JFrame {
@@ -84,7 +80,8 @@ public class MenuGUI extends JFrame {
     //<editor-fold desc="Stock List">
 
     private JPanel stockList;
-    private JTable list;
+    private JTable listCircBar;
+    private JTable listCircTube;
     //</editor-fold>
 
     public MenuGUI(String title) {
@@ -101,21 +98,42 @@ public class MenuGUI extends JFrame {
         });
         listBtn.addActionListener(e -> {
             try {
-                String[] columnNames = {"diameter",
+                String[] columnNames1 = {"diameter",
                         "length",
                         "material",
                         "quantity"
                 };
+                String[] columnNames2 = {"diameter",
+                        "length",
+                        "material",
+                        "wall thickness",
+                        "quantity"
+                };
 
-                Object[][] data = GetListDB.as("circ_bar");
-                System.out.println("END RESULT: " + Arrays.deepToString(data));
+                //System.out.println("END RESULT: " + Arrays.deepToString(data));
+                JLabel l1 = new JLabel("Circular bar");
+                l1.setSize(10, 30);
+                l1.setBackground(Color.green);
+                JLabel l2 = new JLabel("Circular tube");
+                l2.setBackground(Color.green);
 
-                list = new JTable(data, columnNames);
-                JScrollPane stockList = new JScrollPane(list);
-                list.setFillsViewportHeight(true);
+                listCircBar = new JTable(GetListDB.List("circ_bar"), columnNames1);
+                listCircTube = new JTable(GetListDB.List("circ_tube"), columnNames2);
+                stockList.setLayout(new GridLayout(4, 3));
+
+                listCircBar.setFillsViewportHeight(true);
+                listCircTube.setFillsViewportHeight(true);
+                JScrollPane p1 = new JScrollPane(listCircBar);
+                JScrollPane p2 = new JScrollPane(listCircTube);
+
+                stockList.add(l1);
+                stockList.add(p1);
+                stockList.add(l2);
+                stockList.add(p2);
 
                 setContentPane(stockList);
                 revalidate();
+
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -305,4 +323,6 @@ public class MenuGUI extends JFrame {
 
 
     }
+
+
 }

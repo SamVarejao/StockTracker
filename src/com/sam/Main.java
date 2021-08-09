@@ -1,7 +1,6 @@
 package com.sam;
 
 import javax.swing.*;
-import java.sql.SQLException;
 
 public class Main {
 
